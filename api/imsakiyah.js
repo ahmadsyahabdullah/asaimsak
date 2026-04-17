@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   const headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     'X-Requested-With': 'XMLHttpRequest',
-    'Referer': 'https://bimasislam.kemenag.go.id/jadwalimsakiyah',
+    'Referer': 'https://bimasislam.kemenag.go.id/jadwalshalat',
     'Origin': 'https://bimasislam.kemenag.go.id',
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
   };
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     if (action === 'getCities') {
       if (!prov) return res.status(400).json({ error: 'Missing prov' });
 
-      const sessionRes = await fetch('https://bimasislam.kemenag.go.id/jadwalimsakiyah', { headers: { 'User-Agent': headers['User-Agent'] } });
+      const sessionRes = await fetch('https://bimasislam.kemenag.go.id/jadwalshalath', { headers: { 'User-Agent': headers['User-Agent'] } });
       const setCookieHeader = sessionRes.headers.get('set-cookie');
       let cookieString = '';
       if (setCookieHeader) {
@@ -64,7 +64,7 @@ export default async function handler(req, res) {
 
     // 1. Dapatkan Session Cookie pertama kali (sesuai aksi, beda URL referer agar session valid)
     const isShalat = action === 'getShalat';
-    const refererUrl = isShalat ? 'https://bimasislam.kemenag.go.id/jadwalshalat' : 'https://bimasislam.kemenag.go.id/jadwalimsakiyah';
+    const refererUrl = isShalat ? 'https://bimasislam.kemenag.go.id/jadwalshalat' : 'https://bimasislam.kemenag.go.id/jadwalshalat';
 
     headers['Referer'] = refererUrl;
 
